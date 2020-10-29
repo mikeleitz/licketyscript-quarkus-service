@@ -1,9 +1,9 @@
 job("build and publish") {
-    container("gradle:6.7.0-jdk11") {
+    container("oracle/graalvm-ce:20.2.0") {
         kotlinScript { api ->
-            api.gradle("build")
+            api.gradlew("build -Dquarkus.package.type=native")
             try {
-                api.gradle("publish")
+                api.gradlew("publish")
             } catch (ex: Exception) {
                 println("Publishing failed")
             }

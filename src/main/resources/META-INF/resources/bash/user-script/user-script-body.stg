@@ -1,0 +1,18 @@
+if [ -n "${LICKETY_SCRIPT_HOME+set}" ]; then
+  . "$LICKETY_SCRIPT_HOME/scripts/<scriptName>/lickety-<scriptFile>" "$@"
+  .log 6 '$LICKETY_SCRIPT_HOME was set to ' $LICKETY_SCRIPT_HOME
+else
+  echo 'LICKETY_SCRIPT_HOME variable not set. Set before running. The default location is $HOME/.lickety-script'
+  exit 1
+fi
+
+# Check to see if lickety-<scriptFile> exists in $DIR, execute. Otherwise guess we're in ../scripts/<scriptFile>
+
+# Your code goes below. All your input is validated by the time it gets here.
+# All variables are listed above.
+
+# Uncomment to print out the variables
+#
+# <allOptionsAndType:{ option |
+echo "$<option>"
+# }>

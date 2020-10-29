@@ -1,0 +1,18 @@
+##################################################################################################
+# Add helper/delegate functions here.
+##################################################################################################
+
+function .logAllVariables() {
+  <allVariables:{ variable |.log 7 '<variable>: ' $<variable>
+  }>
+}
+
+##################################################################################################
+# Add script code below here.
+##################################################################################################
+
+.logAllVariables
+
+<bashOptionsWithValidations:{ option |
+.<option.longNameBashFriendly>Validate $<option.longNameBashFriendly>_ARG
+}>

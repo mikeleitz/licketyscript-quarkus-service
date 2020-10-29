@@ -1,0 +1,5 @@
+TIMESTAMP_ONE_TRUE_REGEX="^\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2}:\\d{1,2}(?:,\\d{1,3})?$"
+
+function .validateTimestampOneTrueValue() {
+  .validateValueWithRegex $1 "$2" "$TIMESTAMP_ONE_TRUE_REGEX"
+}

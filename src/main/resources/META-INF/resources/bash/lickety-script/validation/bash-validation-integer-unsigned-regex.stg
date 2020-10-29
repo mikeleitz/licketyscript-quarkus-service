@@ -1,0 +1,5 @@
+UNSIGNED_INTEGER_REGEX="^[0-9]{1,10}$"
+
+function .validateUnsignedIntegerValue() {
+  .validateValueWithRegex $1 "$2" "$UNSIGNED_INTEGER_REGEX"
+}

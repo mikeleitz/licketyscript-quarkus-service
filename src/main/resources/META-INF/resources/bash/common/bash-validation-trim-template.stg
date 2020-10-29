@@ -1,0 +1,8 @@
+if [[ "${<isVariableSpecified>}" -eq 1  && -z "${<variable>}" ]]; then
+    # Trim leading whitespace
+    <variable>="${<variable>#"${<variable>%%[![:space:]]*}"}"
+    # Trim trailing whitespace
+    <variable>="${<variable>%"${<variable>##*[![:space:]]}"}"
+fi
+
+

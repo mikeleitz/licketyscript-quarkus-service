@@ -1,0 +1,18 @@
+###############################################################################
+# This script is responsible for installing your script into your home
+# directory. Lickety-Script establishes a hidden directories in $HOME.
+# .lickety-script/              : The root directory
+# .lickety-script/scripts/      : Each script has its own subdirectory with
+#                                 all its files in it.
+# .lickety-script/bin           : has a symlink to each user-script
+#
+# This installer script will create all directories if they don't already
+# exist. It moves all script files to their appropriate position in the
+# directory tree above and sets the appropriate permissions.
+#
+# The installer will *never* overwrite the user-script but will always
+# overwrite all other script files. So it's safe to use the lickety-script tool
+# to create a second iteration of your script with additional options and
+# install that new iteration. It won't overwrite the user-script file.
+###############################################################################
+

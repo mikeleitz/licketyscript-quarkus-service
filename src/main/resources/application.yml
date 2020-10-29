@@ -1,0 +1,7 @@
+greeting:
+  message: "hello"
+  name: "quarkus"
+quarkus:
+  http:
+    cors: true
+    origins: https://ui.licketyscript.app

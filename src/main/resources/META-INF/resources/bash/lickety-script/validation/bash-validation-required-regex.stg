@@ -1,0 +1,5 @@
+VALUE_REQUIRED_REGEX="[^[:space:]]+"
+
+function .validateRequiredValue() {
+  .validateValueWithRegex $1 "$2" "$VALUE_REQUIRED_REGEX"
+}

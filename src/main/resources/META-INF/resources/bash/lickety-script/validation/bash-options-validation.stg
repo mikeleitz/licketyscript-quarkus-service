@@ -1,0 +1,41 @@
+################################################################################
+# This section contains all the input validations. If a script input (option)
+# needs to be non-null/non-empty, the validation will be performed in this
+# validation function.
+#
+# All validation functions return a 0 if the value is valid and any other value
+# if it's invalid.
+#
+# These validation scripts obtain the particular input values from their
+# parsed input. e.g. MY_VALUE_ARG
+################################################################################
+
+
+  <bashOptionsWithValidations:{ option |
+function .<option.longNameBashFriendly>Validate() {
+  local VALUE="$1"
+
+  <option.longNameBashFriendly>Valid=0
+  <if(!option.inputRequired)>
+
+  # This input option isn't required. If it's empty/unset return 0. Don't do any additional validations.
+  local IS_VALUE_SET=""
+
+  .validateRequiredValue IS_VALUE_SET "$VALUE" ""
+
+  if [ "$IS_VALUE_SET" -ne "0" ]; then
+    # Value not set. Since this isn't a required value, don't do future validations.
+    return 0
+  fi
+  <endif>
+
+  <option.bashValidations:{ vali |
+  <vali.validationEnum.functionName> <option.longNameBashFriendly>Valid "$VALUE" "<vali.value>"
+
+  if [ "$<option.longNameBashFriendly>Valid" -ne "0" ]; then
+    .log 2 "<option.longName> is invalid: value must be <vali.name>";
+    return 22;
+  fi
+  }>
+\}
+  }>

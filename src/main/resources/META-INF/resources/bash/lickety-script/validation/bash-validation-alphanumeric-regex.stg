@@ -1,0 +1,5 @@
+ALPHANUMERIC_REGEX="^[a-zA-Z0-9]+$"
+
+function .validateAlphanumericValue() {
+  .validateValueWithRegex $1 "$2" "$ALPHANUMERIC_REGEX"
+}

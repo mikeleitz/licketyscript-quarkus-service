@@ -1,0 +1,28 @@
+##################################################################################################
+# Declare all variables used in the input parsing section
+##################################################################################################
+
+<allVariables:{ variable |<variable>=
+}>
+
+# Arg parsing from: https://github.com/mattbryson/bash-arg-parse
+
+# positional args
+args=()
+
+# Handle all possible script inputs.
+while [ "$1" != "" ]; do
+  case "$1" in
+<allSwitchStatements:{ allSwitchStatement |
+<allSwitchStatement>
+}> --)
+    shift
+    break
+    ;;
+  *)
+    echo "Programming error"
+    exit 3
+    ;;
+  esac
+  shift
+done

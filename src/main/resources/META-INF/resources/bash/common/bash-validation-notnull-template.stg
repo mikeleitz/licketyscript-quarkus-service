@@ -1,0 +1,4 @@
+if [[ "${<isVariableSpecified>}" -eq 1  && -z "${<variable>}" ]]; then
+  .log 0 "<variable> not set.  Can't execute script unless this value is set."
+  exit 1
+fi

@@ -1,0 +1,5 @@
+SIGNED_INTEGER_REGEX="^-?[0-9]{1,10}$"
+
+function .validateSignedIntegerValue() {
+  .validateValueWithRegex $1 "$2" "$SIGNED_INTEGER_REGEX"
+}

@@ -1,0 +1,47 @@
+# Overview
+
+This script was created by a script creation tool: [Lickety-Script](https://licketyscript.app).
+
+Lickety-Script is a framework that makes creating your own scripts easier. It includes a framework script that helps with inputs and their validations and a user script stub where you put your specific code in.
+
+# Install
+
+Unzip the downloaded bundle. Navigate into the unzipped directory.
+
+Run
+
+```bash
+chmod 755 installer.sh
+./installer.sh
+```
+
+These files are installed in your home directory in .lickety-script/
+
+Add $HOME/.lickety-script/bin to your $PATH.
+
+# Usage
+
+Run the user script. The user script shares the name you used in the tool. As long as $HOME/.lickety-script/bin is in the $PATH, everything should work.
+
+# Directory Structure
+
+```
+.lickety-script/              : The root directory
+.lickety-script/scripts/      : Each script has its own subdirectory with
+                                all its files in it.
+.lickety-script/bin           : has a symlink to each user-script
+```
+
+# Files
+
+```
+manifest                      : Lists all files included in the bundle
+installer.sh                  : Installs the script in the proper directory
+                                Must chmod to executable before running
+[script-name].sh              : The user script. This is the script you put
+                                your logic into.
+lickety-[script-name].sh      : This is the framework script. The user script
+                                will call this framework script before executing
+                                your logic in the user script. It's responsible
+                                for handling script input and validation.
+```

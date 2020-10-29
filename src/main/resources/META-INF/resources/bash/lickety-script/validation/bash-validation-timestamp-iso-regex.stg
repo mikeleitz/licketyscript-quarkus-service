@@ -1,0 +1,5 @@
+TIMESTAMP_ISO_REGEX="^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(\\.\\d+)?(([+-]\\d\\d:\\d\\d)|Z)?$"
+
+function .validateTimestampIsoValue() {
+  .validateValueWithRegex $1 "$2" "$TIMESTAMP_ISO_REGEX"
+}

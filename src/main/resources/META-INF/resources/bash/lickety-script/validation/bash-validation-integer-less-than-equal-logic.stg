@@ -1,0 +1,40 @@
+################################################################################
+# This function validates whether or not a given integer is less than or
+# equal to a specific value.
+#
+# arg $1 : variable to put the result in
+# arg $2 : the value to test
+# arg $3 : the number to be less than or equal
+################################################################################
+function .validateIntegerLessThanEqual() {
+  local  __resultvar=$1
+  local validationResult=0
+
+  local valueToTest="$2"
+  local BOUNDARY_VALUE="$3"
+
+  # Value must be less than or equal to the $BOUNDARY_VALUE.
+
+  if [[ -z "$BOUNDARY_VALUE" ]]; then
+      .log 7 'No boundary value set. Nothing to test.'
+  else
+    if [[ "$valueToTest" -le "$BOUNDARY_VALUE" ]]; then
+      # Valid
+
+      .log 7 "$valueToTest" ' is less than or equal to ' "$BOUNDARY_VALUE" ' and is valid.'
+      eval "$__resultvar"="'$validationResult'"
+    else
+      # Invalid
+      .log 7 "$valueToTest" ' is greater than to ' "$BOUNDARY_VALUE" ' and is invalid.'
+
+      validationResult=1
+      eval "$__resultvar"="'$validationResult'"
+    fi
+  fi
+
+  if [[ "$valueToTest" -eq "0" ]]; then
+    .log 7 "$valueToTest" ' passed its integer range validations.'
+  else
+    .log 7 "$valueToTest" ' passed its integer range validations.'
+  fi
+}

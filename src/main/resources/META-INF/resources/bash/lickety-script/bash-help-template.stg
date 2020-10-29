@@ -1,0 +1,11 @@
+function .printHelp() {
+  echo "Copyright (c) <year> <author>"
+  echo "<scriptName><scriptExtension> <scriptVersion> (<date>)"
+  echo "<scriptPurpose>"
+  echo "Usage:"
+  echo "<scriptName> [-options]"
+  echo "Help:"
+<helpBody>
+
+  exit 0
+}

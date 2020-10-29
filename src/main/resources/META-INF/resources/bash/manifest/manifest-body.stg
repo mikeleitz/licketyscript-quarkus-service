@@ -1,0 +1,5 @@
+# All files in the zip and their purpose
+
+<nameAndRoleList:{ nameAndRole |
+<nameAndRole.left> - <nameAndRole.right>
+}>

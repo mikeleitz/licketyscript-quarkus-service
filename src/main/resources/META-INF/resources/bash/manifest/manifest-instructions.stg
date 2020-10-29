@@ -1,0 +1,18 @@
+################################################################################
+# This is the manifestFile file for your Lickety-Script bundle.
+# It contains the following types of files.
+#
+# lickety-script file - This is a script responsible for bootstrapping your
+#                       script. It handles the input and validations specified
+#                       in the lickety-script tool.
+# user script file    - This is the file you will put your processing logic
+#                       into. It will call the lickety-script file to get
+#                       user input and do validations. Once that completes,
+#                       the user script will take control with all variables
+#                       validated.
+# This manifest file  - Lists all files included in the zip bundle.
+# readme markdown     - A markdown file with all options and documentation.
+# installer script    - The script you run to install all relevant files
+#                       to the appropriate ~/.lickety-script directory.
+#
+################################################################################

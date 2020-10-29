@@ -1,0 +1,36 @@
+################################################################################
+# Common function that takes 3 arguments.
+#
+# $1 is the variable you want to store the result of this validation
+# $2 is the value to validate
+# $3 is the regex to do the validation
+#
+# This function sets the variable specified with argument $1 to 0 if the
+# value is valid and any other number if it's not valid.
+#
+# e.g.
+# .validateValueWithRegex validation_result "abcd" "$ALPHANUMERIC"
+# echo 'validation result' $validation_result
+################################################################################
+function .validateValueWithRegex() {
+  .log 7 'Validating input using a regex.'
+
+  local  __resultvar=$1
+  local  regex_result=0
+
+  valueToTest="$2"
+  regex="$3"
+
+  .log 7 'Using regex: ' $regex
+  .log 7 'Validating: ' $valueToTest
+
+  if [[ $valueToTest =~ $regex ]]; then
+    .log 7 'valid'
+    regex_result=0
+  else
+    .log 7 'not valid'
+    regex_result=1
+  fi
+
+  eval "$__resultvar"="'$regex_result'"
+}

@@ -1,0 +1,9 @@
+  <bashCustomRegexValidations:{ optionValidation |
+
+<optionValidation.name>_CUSTOM_REGEX="<optionValidation.regex>"
+
+function .validate<optionValidation.name>CustomRegex() {
+  .validateValueWithRegex $1 "$2" "$<optionValidation.name>_CUSTOM_REGEX"
+\}
+}>
+

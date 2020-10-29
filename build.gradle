@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'jacoco'
+    id 'io.freefair.lombok' version '5.2.1'
+    id 'io.quarkus' version "1.9.0.Final"
+    id 'org.kordamp.gradle.jandex' version '0.7.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+    implementation 'io.quarkus:quarkus-container-image-docker'
+    implementation 'io.quarkus:quarkus-config-yaml'
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-jackson'
+    implementation 'io.quarkus:quarkus-resteasy-jackson'
+    implementation 'io.quarkus:quarkus-micrometer'
+    implementation 'io.quarkus:quarkus-arc'
+
+    implementation 'org.antlr:ST4:4.3.1'
+
+    implementation 'commons-io:commons-io:2.7'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'com.github.marschall:memoryfilesystem:2.1.0'
+    implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'commons-codec:commons-codec:1.15'
+
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+group 'com.leadtechnologist'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+quarkusBuild {
+    nativeArgs {
+//        containerBuild = true
+//        buildImage = "quay.io/quarkus/ubi-quarkus-native-image:20.2.0-java11"
+        resourceConfigurationFiles = 'resources-config.json'
+    }
+}

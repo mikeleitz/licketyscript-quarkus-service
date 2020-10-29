@@ -1,0 +1,52 @@
+# Create directory if it doesn't exist
+mkdir -p $HOME/.lickety-script
+
+if [ ! -d "$HOME/.lickety-script" ]
+then
+    echo "Error: Directory $HOME/.lickety-script does not exist."
+    exit 1
+fi
+
+mkdir -p $HOME/.lickety-script/scripts
+
+if [ ! -d "$HOME/.lickety-script/scripts" ]
+then
+    echo "Error: Directory $HOME/.lickety-script/scripts does not exist."
+    exit 1
+fi
+
+mkdir -p $HOME/.lickety-script/bin
+
+if [ ! -d "$HOME/.lickety-script/bin" ]
+then
+    echo "Error: Directory $HOME/.lickety-script/bin does not exist."
+    exit 1
+fi
+
+mkdir -p $HOME/.lickety-script/scripts/<scriptName>
+
+if [ ! -d "$HOME/.lickety-script/scripts/<scriptName>" ]
+then
+    echo "Error: Directory $HOME/.lickety-script/scripts/<scriptName> does not exist."
+    exit 1
+fi
+
+mv ./<scriptName>.md $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.md
+mv ./lickety-<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/lickety-<scriptName>.sh
+mv ./installer.sh $HOME/.lickety-script/scripts/<scriptName>/installer.sh
+mv ./manifest $HOME/.lickety-script/scripts/<scriptName>/manifest
+
+# If the user script doesn't exist, copy it over. Otherwise don't copy and keep
+# the one that's currently there.
+
+if [ ! -f "$HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh" ]
+then
+    mv ./<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh
+else
+    rm ./<scriptName>.sh
+fi
+
+ln -sf $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh $HOME/.lickety-script/bin
+
+chmod 755 $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh
+chmod 755 $HOME/.lickety-script/scripts/<scriptName>/lickety-<scriptName>.sh

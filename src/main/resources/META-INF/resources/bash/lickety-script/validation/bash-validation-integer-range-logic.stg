@@ -1,0 +1,108 @@
+# TODO delete this. It's not used anymore and it's too complicated.
+
+
+################################################################################
+# This function validates whether or not a given integer falls in a specific
+# range.
+#
+# It covers \<, >, \<=, and >=
+#
+# arg $1 : variable to put the result in
+# arg $2 : the value to test
+# arg $3 : greater than (lower bound)
+# arg $4 : and equals (inclusive)?
+# arg $5 : less than (upper bound)
+# arg $6 : and equals (inclusive)?
+#
+################################################################################
+function .validateIntegerInRange() {
+  local  __resultvar=$1
+  local validationResult=0
+
+  local valueToTest="$2"
+
+  local LOWER_BOUND="$3"
+  local LOWER_BOUND_EQUALITY="$4"
+  local UPPER_BOUND="$5"
+  local UPPER_BOUND_EQUALITY="$6"
+
+  # Value must be greater or greater/equal than the $LOWER_BOUND.
+
+  if [[ -z "$LOWER_BOUND" ]]; then
+      .log 7 'No lower bound set. Not testing greater than.'
+  else
+    if [[ -z "$LOWER_BOUND_EQUALITY" || "$LOWER_BOUND_EQUALITY" -eq "0" ]]; then
+      .log 7 'Testing ' "$valueToTest" ' > ' "$LOWER_BOUND"
+
+      if [[ "$valueToTest" -gt "$LOWER_BOUND" ]]; then
+        # Valid
+
+        .log 7 "$valueToTest" ' is greater than ' "$LOWER_BOUND" ' and is valid.'
+      else
+        # Invalid
+        .log 7 "$valueToTest" ' is less than or equal ' "$LOWER_BOUND" ' and is invalid.'
+
+        validationResult=1
+        eval "$__resultvar"="'$validationResult'"
+        return
+      fi
+    else
+      .log 7 'Testing ' "$valueToTest" ' >= ' "$LOWER_BOUND"
+
+      if [[ "$valueToTest" -ge "$LOWER_BOUND" ]]; then
+        # Valid
+
+        .log 7 "$valueToTest" ' is greater than or equal ' "$LOWER_BOUND" ' and is valid.'
+      else
+        # Invalid
+        .log 7 "$valueToTest" ' is less than ' "$LOWER_BOUND" ' and is invalid.'
+
+        validationResult=1
+        eval "$__resultvar"="'$validationResult'"
+        return
+      fi
+    fi
+  fi
+
+  # Test that the value is smaller than the upper bound (less than).
+  if [[ -z "$UPPER_BOUND" ]]; then
+      .log 7 'No upper bound set. Not testing less than.'
+  else
+    if [[ "$UPPER_BOUND_EQUALITY" -eq "0" ]]; then
+      .log 7 'Testing ' "$valueToTest" ' \< ' "$UPPER_BOUND"
+
+      if [[ -z "$LOWER_BOUND_EQUALITY" || "$valueToTest" -lt "$UPPER_BOUND" ]]; then
+        # Valid
+
+        .log 7 "$valueToTest" ' is less than ' "$UPPER_BOUND" ' and is valid.'
+      else
+        # Invalid
+
+        .log 7 "$valueToTest" ' is less than or equal ' "$LOWER_BOUND" ' and is invalid.'
+
+        validationResult=1
+        eval "$__resultvar"="'$validationResult'"
+      fi
+    else
+      .log 7 'Testing ' "$valueToTest" ' \<= ' "$UPPER_BOUND"
+
+      if [[ "$valueToTest" -le "$UPPER_BOUND" ]]; then
+        # Valid
+
+        .log 7 "$valueToTest" ' is less than or equal ' "$UPPER_BOUND" ' and is valid.'
+      else
+        # Invalid
+        .log 7 "$valueToTest" ' is greater than ' "$UPPER_BOUND" ' and is invalid.'
+
+        validationResult=1
+        eval "$__resultvar"="'$validationResult'"
+      fi
+    fi
+  fi
+
+  if [[ "valueToTest" -eq "0" ]]; then
+    .log 7 "$valueToTest" ' passed its integer range validations.'
+  else
+    .log 7 "$valueToTest" ' passed its integer range validations.'
+  fi
+}

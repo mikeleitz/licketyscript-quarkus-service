@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'jacoco'
+    id 'maven-publish'    
     id 'io.freefair.lombok' version '5.2.1'
     id 'io.quarkus' version "1.9.0.Final"
     id 'org.kordamp.gradle.jandex' version '0.7.0'
@@ -58,5 +59,31 @@ quarkusBuild {
 //        containerBuild = true
 //        buildImage = "quay.io/quarkus/ubi-quarkus-native-image:20.2.0-java11"
         resourceConfigurationFiles = 'resources-config.json'
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.leadtechnologist'
+            artifactId = 'licketyscript-service'
+            version = "0.0.1-SNAPSHOT"
+            from components.java
+
+            pom {
+                name = 'licketyscript-service'
+                description = 'The Java service for lickety script application.'
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url "https://maven.pkg.jetbrains.space/leadtechnologist/p/lsc/leadtechnologist"
+            credentials {
+                username = "$System.env.JB_SPACE_CLIENT_ID"
+                password = "$System.env.JB_SPACE_CLIENT_SECRET"
+            }
+        }
     }
 }

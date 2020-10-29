@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'jacoco'
-    id 'maven-publish'    
+    id 'maven-publish'
     id 'io.freefair.lombok' version '5.2.1'
     id 'io.quarkus' version "1.9.0.Final"
     id 'org.kordamp.gradle.jandex' version '0.7.0'
@@ -57,7 +57,7 @@ compileTestJava {
 quarkusBuild {
     nativeArgs {
 //        containerBuild = true
-//        buildImage = "quay.io/quarkus/ubi-quarkus-native-image:20.2.0-java11"
+        buildImage = "leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/ubi-quarkus-native-image:20.2.0-java11"
         resourceConfigurationFiles = 'resources-config.json'
     }
 }

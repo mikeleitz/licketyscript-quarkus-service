@@ -7,11 +7,8 @@ job("build and publish") {
             } catch (ex: Exception) {
                 println("Publishing failed")
             }
-        }
 
-        shellScript {
-            content = "ls -l ./"
-//            content = "ls -l $mountDir/share"
+            api.fileShare().put("$mountDir/share/licketyscript-quarkus-service-1.0-SNAPSHOT.jar", "build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar")
         }
     }
 

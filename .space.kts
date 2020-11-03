@@ -8,7 +8,7 @@ job("build and publish") {
                 println("Publishing failed")
             }
 
-            api.fileShare().put("$mountDir/share/licketyscript-quarkus-service-1.0-SNAPSHOT.jar", "build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar")
+            api.fileShare().put(File("$mountDir/share/licketyscript-quarkus-service-1.0-SNAPSHOT.jar"), "build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar")
         }
     }
 

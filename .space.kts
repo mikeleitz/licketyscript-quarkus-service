@@ -3,9 +3,6 @@ job("build and publish") {
         shellScript {
             content = "./gradlew build quarkusBuild --uber-jar publish"
         }
-        shellScript {
-            content = "ls -la build/libs/"
-        }
     }
 }
 

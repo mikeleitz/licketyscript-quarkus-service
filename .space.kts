@@ -9,7 +9,7 @@ job("build and publish") {
             }
         }
     }
-
+/*
     docker {
         build {
             context = "/mnt/space/work"
@@ -18,5 +18,5 @@ job("build and publish") {
         push("leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/licketyscript-quarkus-service") {
             tag = "latest"
         }
-    }
+    }*/
 }

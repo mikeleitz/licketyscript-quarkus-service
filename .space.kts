@@ -3,6 +3,8 @@ job("build and publish") {
         shellScript {
             content = """
                     ./gradlew build quarkusBuild --uber-jar publish
+                    pwd
+                    ls -lahrt
                     cp ./ mnt/space/share
                 """
         }

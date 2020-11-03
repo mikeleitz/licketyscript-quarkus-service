@@ -5,13 +5,15 @@ job("build and publish") {
                     ./gradlew build quarkusBuild --uber-jar publish
                     pwd
                     ls -lahrt
-                    cp ./ mnt/space/share
                 """
         }
     }
     docker {
         beforeBuildScript {
-            content = "cp mnt/space/share docker"
+            content = """
+                pwd
+                ls -lahrt
+                """
         }
         build {
             context = "docker"

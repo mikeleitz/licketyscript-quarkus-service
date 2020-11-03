@@ -10,7 +10,7 @@ job("build and publish") {
         }
 
         shellScript {
-            content = "echo World > /mnt/space/share/file.txt"
+            content = "ls -l /mnt/space/"
         }
     }
 

@@ -10,8 +10,7 @@ job("build and publish") {
         }
 
         shellScript {
-            ls -lahrt
-            pwd
+            content "ls -lahrt"
 
 //            content = "cp build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar $mountDir/share/licketyscript-quarkus-service-1.0-SNAPSHOT.jar"
         }

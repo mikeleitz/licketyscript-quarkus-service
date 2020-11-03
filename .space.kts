@@ -10,7 +10,7 @@ job("build and publish") {
         }
 
         shellScript {
-            content = "ls -l build/libs"
+            content = "ls -l ./"
 //            content = "ls -l $mountDir/share"
         }
     }

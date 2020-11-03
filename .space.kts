@@ -8,6 +8,16 @@ job("build and publish") {
                 println("Publishing failed")
             }
         }
+
+        shellScript {
+            content = "cp build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar $mountDir/share/licketyscript-quarkus-service-1.0-SNAPSHOT.jar"
+        }
+    }
+
+    container("ubuntu") {
+        shellScript {
+            content = "ls -la $mountDir/share/licketyscript-quarkus-service-1.0-SNAPSHOT.jar"
+        }
     }
 /*
     docker {

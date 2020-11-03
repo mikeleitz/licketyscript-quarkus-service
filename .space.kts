@@ -5,6 +5,8 @@ job("build and publish") {
                     ./gradlew build quarkusBuild --uber-jar publish
                     pwd
                     ls -lahrt
+                    mkdir -p /mnt/space/work/build/libs
+                    cp build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar /mnt/space/work/build/libs
                 """
         }
     }
@@ -16,7 +18,7 @@ job("build and publish") {
                 """
         }
         build {
-            context = "docker"
+            context = ""
             file = "src/main/docker/Dockerfile.jvm"
         }
         push("leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/licketyscript-quarkus-service") {

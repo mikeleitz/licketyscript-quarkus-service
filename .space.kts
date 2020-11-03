@@ -6,8 +6,8 @@ job("build and publish") {
     }
     docker {
         build {
-            context = "$mountDir/share/"
-            file = "$mountDir/share/src/main/docker/Dockerfile.jvm"
+            context = "/mnt/space/work"
+            file = "src/main/docker/Dockerfile.jvm"
         }
         push("leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/licketyscript-quarkus-service") {
             tag = "latest"

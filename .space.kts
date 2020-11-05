@@ -20,7 +20,7 @@ job("build and publish") {
                 ls -lahrt /mnt/space/work
                 mkdir -p build/libs
                 mv /mnt/space/share/licketyscript-quarkus-service-1.0-SNAPSHOT.jar build/libs
-                mkdir -p /run/user/$UID
+                mkdir -p /run/user/${UID}
                 """
         }
         build {

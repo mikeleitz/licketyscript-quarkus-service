@@ -3,8 +3,6 @@ job("build and publish") {
         shellScript {
             content = """
                     ./gradlew build quarkusBuild --uber-jar publish
-                    mkdir -p /mnt/space/work/build/libs
-                    cp build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar /mnt/space/work/build/libs
                 """
         }
     }
@@ -12,7 +10,8 @@ job("build and publish") {
         beforeBuildScript {
             content = """
                 pwd
-                ls -lahrt
+                ls -lahrt src/main/docker/Dockerfile.jvm
+                ls -lahrt build/
                 """
         }
         build {

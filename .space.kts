@@ -6,7 +6,7 @@ job("build and publish") {
                     pwd
                     ls -lahrt
                     mkdir -p /mnt/space/work/build/libs
-                    ls -lahrt /mnt/space/work/src/main/docker/Dockerfile.native
+                    ls -lahrt /mnt/space/work/build/*-runner 
                 """
         }
     }

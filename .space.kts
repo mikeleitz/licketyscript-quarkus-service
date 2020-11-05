@@ -11,16 +11,10 @@ job("build and publish") {
     }
     docker {
         beforeBuildScript {
-            content = """
-                pwd
-                ls -lahrt
-                """
+            content = "ls -lahrt /mnt/space/work/src/main/docker/Dockerfile.jvm"
         }
         build {
-            context = """
-                    pwd
-                    ls -lahrt
-                """
+            context = ""
             file = "/mnt/space/work/src/main/docker/Dockerfile.jvm"
         }
         push("leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/licketyscript-quarkus-service") {

@@ -4,7 +4,7 @@ job("build and publish") {
             content = """
                     apt-get update && \
                     apt-get install -y openjdk-11-jre-headless && \
-                    apt-get clean;                
+                    apt-get clean                
                     ./gradlew build -Dquarkus.package.type=native
                     pwd
                     ls -lahrt

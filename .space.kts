@@ -2,6 +2,9 @@ job("build and publish") {
     container("docker") {
         shellScript {
             content = """
+                    RUN apt-get update && \
+                    apt-get install -y openjdk-11-jre-headless && \
+                    apt-get clean;                
                     ./gradlew build -Dquarkus.package.type=native
                     pwd
                     ls -lahrt

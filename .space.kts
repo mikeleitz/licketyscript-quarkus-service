@@ -18,8 +18,11 @@ job("build and publish") {
                 """
         }
         build {
-            context = ""
-            file = "src/main/docker/Dockerfile.jvm"
+            context = """
+                    pwd
+                    ls -lahrt
+                """
+            file = "/mnt/space/work/src/main/docker/Dockerfile.jvm"
         }
         push("leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/licketyscript-quarkus-service") {
             tag = "latest"

@@ -3,7 +3,7 @@ job("build and publish") {
         shellScript {
             content = """
                     apk add openjdk11
-                    ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+                    ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Dquarkus.native.builder-image="leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/ubi-quarkus-native-image:20.2.0-java11"
                     pwd
                     ls -lahrt
                     mkdir -p /mnt/space/work/build/libs

@@ -14,7 +14,9 @@ job("build and publish") {
             content = """
                 pwd
                 ls -lahrt src/main/docker/Dockerfile.jvm
-                ls -lahrt
+                ls -lahrt /mnt/
+                ls -lahrt /mnt/space/
+                ls -lahrt /mnt/space/work
                 """
         }
         build {

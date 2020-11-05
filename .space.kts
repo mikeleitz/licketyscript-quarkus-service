@@ -12,7 +12,7 @@ job("build and publish") {
     }
     docker {
         build {
-            context = ""
+            context = "/mnt/space/work"
             file = "/mnt/space/work/src/main/docker/Dockerfile.native"
         }
         push("leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/licketyscript-quarkus-service") {

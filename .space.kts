@@ -6,7 +6,6 @@ job("build and publish") {
                     pwd
                     ls -lahrt
                     mkdir -p /mnt/space/work/build/libs
-                    cp build/libs/licketyscript-quarkus-service-1.0-SNAPSHOT.jar /mnt/space/work/build/libs
                 """
         }
     }

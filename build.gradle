@@ -56,7 +56,7 @@ compileTestJava {
 
 quarkusBuild {
     nativeArgs {
-//        containerBuild = true
+        containerBuild = true
         buildImage = "leadtechnologist.registry.jetbrains.space/p/lsc/leadtechnologist-containers/ubi-quarkus-native-image:20.2.0-java11"
         resourceConfigurationFiles = 'resources-config.json'
     }
@@ -66,12 +66,12 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId = 'com.leadtechnologist'
-            artifactId = 'licketyscript-service'
+            artifactId = 'licketyscript-quarkus-service'
             version = "0.0.1-SNAPSHOT"
             from components.java
 
             pom {
-                name = 'licketyscript-service'
+                name = 'licketyscript-quarkus-service'
                 description = 'The Java service for lickety script application.'
             }
         }

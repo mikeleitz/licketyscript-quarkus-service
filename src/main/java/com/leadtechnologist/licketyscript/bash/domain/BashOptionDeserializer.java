@@ -51,6 +51,8 @@ public class BashOptionDeserializer extends StdDeserializer<BashOption> {
     public BashOption deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         BashOption returnValue = null;
 
+        log.debug("Starting deserializing json payload for creating the bash script.");
+
         JsonNode node = jp.getCodec().readTree(jp);
 
         Integer id = (Integer) ((IntNode) node.get("id")).numberValue();
@@ -102,6 +104,8 @@ public class BashOptionDeserializer extends StdDeserializer<BashOption> {
                 .bashValidations(allValidations)
                 .inputRequired(isOptionValueRequired)
                 .build();
+
+        log.debug("Completed deserializing json payload for creating the bash script.");
 
         return returnValue;
     }

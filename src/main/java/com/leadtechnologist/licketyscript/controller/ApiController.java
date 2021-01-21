@@ -18,6 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ApiController {
     @GET
     public Map<String, String> status() {
-        return Map.of("status", "Ready");
+        return Map.of("status", "Ready", "version", "0.1");
     }
 }

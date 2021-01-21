@@ -48,6 +48,7 @@ public class CreateScriptController {
         String userBashFileName = configuration.getScriptName();
 
         configuration.addScriptInput(BashOption.HELP);
+        configuration.addScriptInput(BashOption.VERBOSE);
 
         ApplicationFile bashScriptFile = bashService.createDelegateBashScriptContents(configuration);
         ApplicationFile installerScriptFile = bashService.createInstallerContents(configuration);

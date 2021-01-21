@@ -7,7 +7,7 @@
 
 # Arg parsing from: https://github.com/mattbryson/bash-arg-parse
 
-# positional args
+# positional args. Not supported in v1.
 args=()
 
 # Handle all possible script inputs.
@@ -20,7 +20,7 @@ while [ "$1" != "" ]; do
     break
     ;;
   *)
-    echo "Programming error"
+    echo "Invalid input. Either unexpected option/switch specified or input is unsupported positional args."
     exit 3
     ;;
   esac

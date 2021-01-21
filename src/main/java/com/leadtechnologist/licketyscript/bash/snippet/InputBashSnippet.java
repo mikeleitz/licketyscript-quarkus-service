@@ -34,7 +34,6 @@ public class InputBashSnippet extends Snippet {
     private static final String TEMPLATE_LOCATION = "META-INF/resources/bash/lickety-script/bash-input-template.stg";
     private static final String VERBOSE_SWITCH_STATEMENT = "  -v | --verbose)\n"
             + "    __VERBOSE=7 # Verbose indicates logging at debug.\n"
-            + "    shift\n"
             + "    ;;";
 
     private static final String HELP_SWITCH_STATEMENT = "  -h | --help)\n"

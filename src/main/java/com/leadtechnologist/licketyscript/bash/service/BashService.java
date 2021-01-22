@@ -18,6 +18,7 @@ package com.leadtechnologist.licketyscript.bash.service;
 
 import java.util.List;
 import com.leadtechnologist.licketyscript.base.application.ApplicationFile;
+import com.leadtechnologist.licketyscript.base.application.LicketyScriptFile;
 import com.leadtechnologist.licketyscript.bash.domain.BashScriptConfiguration;
 
 /**
@@ -32,5 +33,8 @@ public interface BashService {
 
     ApplicationFile createUserBashScriptContents(BashScriptConfiguration bashScriptConfiguration);
 
-    ApplicationFile createManifestContents(BashScriptConfiguration bashScriptConfiguration, List<ApplicationFile> applicationFiles);
+    ApplicationFile createJsonUsedToCreateScript(String json);
+
+    ApplicationFile createManifestContents(BashScriptConfiguration bashScriptConfiguration, List<LicketyScriptFile> applicationFiles);
+
 }

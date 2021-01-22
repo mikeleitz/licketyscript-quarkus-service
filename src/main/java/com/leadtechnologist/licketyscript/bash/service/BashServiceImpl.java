@@ -19,6 +19,7 @@ package com.leadtechnologist.licketyscript.bash.service;
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 import com.leadtechnologist.licketyscript.base.application.ApplicationFile;
+import com.leadtechnologist.licketyscript.base.application.LicketyScriptFile;
 import com.leadtechnologist.licketyscript.bash.domain.BashFile;
 import com.leadtechnologist.licketyscript.bash.domain.BashScriptConfiguration;
 import com.leadtechnologist.licketyscript.bash.domain.InstallerScript;
@@ -90,7 +91,18 @@ public class BashServiceImpl implements BashService {
     }
 
     @Override
-    public ApplicationFile createManifestContents(BashScriptConfiguration bashScriptConfiguration, List<ApplicationFile> applicationFiles) {
+    public ApplicationFile createJsonUsedToCreateScript(String json) {
+        ApplicationFile returnValue = null;
+
+        log.debug("Started creating file with the script creation json payload.");
+
+        log.debug("Completed creating file with the script creation json payload.");
+
+        return returnValue;
+    }
+
+    @Override
+    public ApplicationFile createManifestContents(BashScriptConfiguration bashScriptConfiguration, List<LicketyScriptFile> applicationFiles) {
         ApplicationFile returnValue;
 
         log.debug("Started creating manifestFile file for [{}].", bashScriptConfiguration.getScriptName());

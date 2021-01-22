@@ -18,9 +18,12 @@ import java.util.zip.ZipOutputStream;
 import com.leadtechnologist.licketyscript.SnippetTemplateFactory;
 import com.leadtechnologist.licketyscript.SnippetTemplateFactoryThreadLocal;
 import com.leadtechnologist.licketyscript.base.application.ApplicationFile;
+import com.leadtechnologist.licketyscript.base.application.LicketyScriptFile;
+import com.leadtechnologist.licketyscript.base.application.TextFile;
 import com.leadtechnologist.licketyscript.bash.domain.BashOption;
 import com.leadtechnologist.licketyscript.bash.domain.BashScriptConfiguration;
 import com.leadtechnologist.licketyscript.bash.service.BashService;
+import com.leadtechnologist.licketyscript.utils.JsonThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
@@ -45,6 +48,10 @@ public class CreateScriptController {
     public Response createScript(BashScriptConfiguration configuration) {
         log.info("Received create script request for data [{}].", configuration);
 
+        String jsonStringValue = JsonThreadLocal.get();
+        log.info("Json thread local value : [{}].", jsonStringValue);
+        JsonThreadLocal.unset();
+
         String userBashFileName = configuration.getScriptName();
 
         configuration.addScriptInput(BashOption.HELP);
@@ -54,10 +61,13 @@ public class CreateScriptController {
         ApplicationFile installerScriptFile = bashService.createInstallerContents(configuration);
         ApplicationFile readmeFile = bashService.createReadmeContents(configuration);
         ApplicationFile userBashScriptFile = bashService.createUserBashScriptContents(configuration);
+
+        TextFile jsonConfiguration = new TextFile(jsonStringValue, "script-configuration.json", "api payload");
+
         ApplicationFile manifestFile = bashService.createManifestContents(configuration, List.of(bashScriptFile, installerScriptFile, readmeFile, userBashScriptFile));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        createZipFileStream(baos, userBashFileName, List.of(bashScriptFile, installerScriptFile, readmeFile, userBashScriptFile, manifestFile));
+        createZipFileStream(baos, userBashFileName, List.of(bashScriptFile, installerScriptFile, readmeFile, userBashScriptFile, manifestFile, jsonConfiguration));
 
         return Response
             .ok((StreamingOutput) output -> {
@@ -75,12 +85,12 @@ public class CreateScriptController {
             .build();
     }
 
-    private void createZipFileStream(ByteArrayOutputStream baos, String scriptName, List<ApplicationFile> licketyScriptFiles) {
+    private void createZipFileStream(ByteArrayOutputStream baos, String scriptName, List<LicketyScriptFile> licketyScriptFiles) {
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(baos)) {
             zipOutputStream.putNextEntry(new ZipEntry(scriptName + "/"));
             zipOutputStream.closeEntry();
 
-            for (ApplicationFile licketyScriptFile : licketyScriptFiles) {
+            for (LicketyScriptFile licketyScriptFile : licketyScriptFiles) {
                 ZipEntry entry = new ZipEntry(scriptName + "/" + licketyScriptFile.getFileName());
 
                 zipOutputStream.putNextEntry(entry);

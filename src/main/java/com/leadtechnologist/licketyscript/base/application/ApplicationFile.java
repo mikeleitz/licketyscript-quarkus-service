@@ -25,7 +25,7 @@ import com.leadtechnologist.licketyscript.base.Snippet;
 /**
  * @author leitz@mikeleitz.com
  */
-public abstract class ApplicationFile {
+public abstract class ApplicationFile implements LicketyScriptFile {
     protected String fileName;
     protected String fileRole;
 
@@ -43,12 +43,6 @@ public abstract class ApplicationFile {
     public String getFileRole() {
         return fileRole;
     }
-
-    /**
-     *
-     * @return the raw file contents
-     */
-    public abstract String getFileContents();
 
     /**
      * Returns a JSON string containing the raw file contents plus any relevant metadata.

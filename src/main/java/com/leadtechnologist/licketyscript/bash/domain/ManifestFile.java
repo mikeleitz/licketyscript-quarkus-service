@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.leadtechnologist.licketyscript.base.Snippet;
 import com.leadtechnologist.licketyscript.base.SnippetContext;
 import com.leadtechnologist.licketyscript.base.application.ApplicationFile;
+import com.leadtechnologist.licketyscript.base.application.LicketyScriptFile;
 import com.leadtechnologist.licketyscript.bash.snippet.manifest.ManifestBody;
 import com.leadtechnologist.licketyscript.bash.snippet.manifest.ManifestInstructions;
 import org.apache.commons.io.FileUtils;
@@ -20,9 +21,9 @@ public class ManifestFile extends ApplicationFile {
     protected ShellOptionEnum shellOptionEnum = ShellOptionEnum.BASH;
 
     protected SnippetContext snippetContext = new SnippetContext();
-    protected List<ApplicationFile> allApplicationFiles;
+    protected List<LicketyScriptFile> allApplicationFiles;
 
-    public ManifestFile(BashScriptConfiguration bashScriptConfiguration, List<ApplicationFile> allApplicationFiles) {
+    public ManifestFile(BashScriptConfiguration bashScriptConfiguration, List<LicketyScriptFile> allApplicationFiles) {
         this.fileRole = "manifest file";
         this.fileName = "manifest";
 

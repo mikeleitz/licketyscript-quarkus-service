@@ -27,6 +27,7 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author leitz@mikeleitz.com
@@ -108,13 +109,23 @@ public class BashOption implements ApplicationInput {
     }
 
     public static String makeVariableNameAcceptableToBash(String variableName) {
-        String returnValue = null;
+        String returnValue = variableName;
 
-        if (Character.isDigit(variableName.charAt(0))) {
-            variableName = "_" + variableName;
+        if (Character.isDigit(returnValue.charAt(0))) {
+            returnValue = "_" + returnValue;
         }
 
-        returnValue = variableName.toUpperCase();
+        if (StringUtils.containsAny(returnValue, "-")) {
+            log.debug("Variable name [{}] has a - character. Needs replacing.", returnValue);
+
+            String newBashVariable = StringUtils.replace(returnValue, "-", "_dash_");
+
+            log.debug("Making variable name [{}] bash friendly. Making it [{}].", returnValue, newBashVariable);
+
+            returnValue = newBashVariable;
+        }
+
+        returnValue = returnValue.toUpperCase();
 
         return returnValue;
     }

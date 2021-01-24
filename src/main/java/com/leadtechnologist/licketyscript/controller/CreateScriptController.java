@@ -27,9 +27,9 @@ import com.leadtechnologist.licketyscript.utils.JsonThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
-///**
-// * @author leitz@mikeleitz.com
-// */
+/**
+ * @author leitz@mikeleitz.com
+ */
 @Slf4j
 @Path("/scripts")
 @Produces(MediaType.APPLICATION_JSON)

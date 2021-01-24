@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 import com.leadtechnologist.licketyscript.base.Snippet;
 import com.leadtechnologist.licketyscript.base.SnippetContext;
 import com.leadtechnologist.licketyscript.bash.domain.BashOption;
+import com.leadtechnologist.licketyscript.bash.domain.ValidationEnum;
 import org.apache.commons.collections4.CollectionUtils;
 
 /**
@@ -37,6 +38,8 @@ public class BashOptionsValidationSnippet extends Snippet {
 
         List<BashOption> optionsWithValidations = bashOptions.stream()
                 .filter(o -> CollectionUtils.isNotEmpty(o.getBashValidations()))
+                // Don't include a validation for a boolean type. It's either on or off.
+                .filter(o -> !o.getValidation(ValidationEnum.BOOLEAN).isPresent())
                 .collect(Collectors.toList());
 
         context.addValue("bashOptionsWithValidations", optionsWithValidations);

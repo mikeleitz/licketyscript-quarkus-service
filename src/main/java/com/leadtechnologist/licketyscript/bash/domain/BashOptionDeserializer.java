@@ -79,15 +79,21 @@ public class BashOptionDeserializer extends StdDeserializer<BashOption> {
             for (JsonNode validation : validations) {
                 BashValidation val = mapper.readValue(validation.toString(), BashValidation.class);
 
-                // If the option doesn't have the value required, mark the object
-                // as input not required. This helps with rendering the script
-                // templates. There isn't an option to figure this out
-                // dynamically.
-                if (val.getValidationEnum() == ValidationEnum.VALUE_REQUIRED) {
-                    isOptionValueRequired = true;
+                if (!val.getValidationEnum().equals(ValidationEnum.STRING)) {
+                    // If the option doesn't have the value required, mark the object
+                    // as input not required. This helps with rendering the script
+                    // templates. There isn't an option to figure this out
+                    // dynamically.
+                    if (val.getValidationEnum() == ValidationEnum.VALUE_REQUIRED) {
+                        isOptionValueRequired = true;
+                    }
+                    // TODO modify when we support more validations.
+                    allValidations.add(val);
+                } else {
+                    log.debug("Not adding string validation, since it isn't supposed to have any template " +
+                        "output. Current processing can't handle a validation without a validation function.");
                 }
-                // TODO modify when we support more validations.
-                allValidations.add(val);
+
             }
 
             allValidations.sort(Comparator.comparing(v -> v.getValidationEnum().getOrder()));

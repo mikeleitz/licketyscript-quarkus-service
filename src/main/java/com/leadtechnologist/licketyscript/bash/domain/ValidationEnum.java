@@ -64,6 +64,7 @@ public enum ValidationEnum {
     LESS_THAN(16, 7, false, "Less than", "Tests if an integer is less than a specified value.", "META-INF/resources/bash/lickety-script/validation/bash-validation-integer-less-than-logic.stg", ".validateIntegerLessThan"),
     LESS_THAN_EQUAL(17, 6, false, "Less than or equal", "Tests if an integer is less than or equal a specified value.", "META-INF/resources/bash/lickety-script/validation/bash-validation-integer-less-than-equal-logic.stg", ".validateIntegerLessThanEqual"),
     CUSTOM_REGEX(13, 15,true, "Custom regex", "This is a regex value supplied by the user.", "META-INF/resources/bash/lickety-script/validation/bash-validation-custom-regex.stg", ""),
+    STRING(4, 16,false, "String", "This value is a string.", "", ""),
     // TODO Phase 2
     //    IPV6(12, "Ipv6 address", "Validates an ipv6 address", "com/mikeleitz/sidekick/bash/validation/bash-validation-ipv6-regex.stg", "validateIpv6Value"),
     //    SIGNED_REAL(3, "Signed real` number", "", "com/mikeleitz/sidekick/bash/validation/bash-validation-real-signed-regex.stg", "validateSignedRealValue"),

@@ -35,6 +35,8 @@ public interface BashService {
 
     ApplicationFile createJsonUsedToCreateScript(String json);
 
+    ApplicationFile createLicense(String year, String copyrightName);
+
     ApplicationFile createManifestContents(BashScriptConfiguration bashScriptConfiguration, List<LicketyScriptFile> applicationFiles);
 
 }

@@ -23,6 +23,7 @@ import com.leadtechnologist.licketyscript.base.application.LicketyScriptFile;
 import com.leadtechnologist.licketyscript.bash.domain.BashFile;
 import com.leadtechnologist.licketyscript.bash.domain.BashScriptConfiguration;
 import com.leadtechnologist.licketyscript.bash.domain.InstallerScript;
+import com.leadtechnologist.licketyscript.bash.domain.LicenseFile;
 import com.leadtechnologist.licketyscript.bash.domain.ManifestFile;
 import com.leadtechnologist.licketyscript.bash.domain.ReadmeFile;
 import com.leadtechnologist.licketyscript.bash.domain.UserScript;
@@ -97,6 +98,19 @@ public class BashServiceImpl implements BashService {
         log.debug("Started creating file with the script creation json payload.");
 
         log.debug("Completed creating file with the script creation json payload.");
+
+        return returnValue;
+    }
+
+    @Override
+    public ApplicationFile createLicense(String year, String copyrightName) {
+        ApplicationFile returnValue;
+
+        log.debug("Started creating license file.");
+
+        returnValue = new LicenseFile(year, copyrightName);
+
+        log.debug("Completed creating license file.");
 
         return returnValue;
     }

@@ -60,6 +60,7 @@ public class SnippetTemplateFactory {
         templateLocations.add("META-INF/resources/bash/lickety-script/validation/bash-validation-integer-less-than-logic.stg");
         templateLocations.add("META-INF/resources/bash/lickety-script/validation/bash-validation-required-regex.stg");
         templateLocations.add("META-INF/resources/bash/lickety-script/bash-logging-template.stg");
+        templateLocations.add("META-INF/resources/bash/license/license-apache.stg");
 
         templateLocationToContents = templateLocations.stream()
             .collect(Collectors.toMap(String::valueOf, SnippetTemplateFactory::loadTemplate));

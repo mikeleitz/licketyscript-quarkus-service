@@ -37,6 +37,8 @@ import org.apache.commons.io.IOUtils;
 public class CreateScriptController {
     SnippetTemplateFactory snippetTemplateFactory;
     BashService bashService;
+    String year = "2021";
+    String copyrightName = "Lead Technologist LLC";
 
     public CreateScriptController(SnippetTemplateFactory snippetTemplateFactory, BashService bashService) {
         this.snippetTemplateFactory = snippetTemplateFactory;
@@ -61,13 +63,14 @@ public class CreateScriptController {
         ApplicationFile installerScriptFile = bashService.createInstallerContents(configuration);
         ApplicationFile readmeFile = bashService.createReadmeContents(configuration);
         ApplicationFile userBashScriptFile = bashService.createUserBashScriptContents(configuration);
+        ApplicationFile licenseFile = bashService.createLicense(year, copyrightName);
 
         TextFile jsonConfiguration = new TextFile(jsonStringValue, "script-configuration.json", "api payload");
 
-        ApplicationFile manifestFile = bashService.createManifestContents(configuration, List.of(bashScriptFile, installerScriptFile, readmeFile, userBashScriptFile));
+        ApplicationFile manifestFile = bashService.createManifestContents(configuration, List.of(bashScriptFile, installerScriptFile, readmeFile, userBashScriptFile, licenseFile));
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        createZipFileStream(baos, userBashFileName, List.of(bashScriptFile, installerScriptFile, readmeFile, userBashScriptFile, manifestFile, jsonConfiguration));
+        createZipFileStream(baos, userBashFileName, List.of(bashScriptFile, installerScriptFile, readmeFile, userBashScriptFile, manifestFile, jsonConfiguration, licenseFile));
 
         return Response
             .ok((StreamingOutput) output -> {

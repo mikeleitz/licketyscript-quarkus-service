@@ -36,6 +36,7 @@ mv ./lickety-<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/lickety-
 mv ./installer.sh $HOME/.lickety-script/scripts/<scriptName>/installer.sh
 mv ./manifest $HOME/.lickety-script/scripts/<scriptName>/manifest
 mv ./script-configuration.json $HOME/.lickety-script/scripts/<scriptName>/script-configuration.json
+mv ./license $HOME/.lickety-script/scripts/<scriptName>/license
 
 # If the user script doesn't exist, copy it over. Otherwise don't copy and keep
 # the one that's currently there.

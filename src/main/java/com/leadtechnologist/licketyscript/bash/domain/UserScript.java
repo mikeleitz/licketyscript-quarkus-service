@@ -13,6 +13,8 @@ import com.leadtechnologist.licketyscript.bash.snippet.userscript.UserScriptBody
 import com.leadtechnologist.licketyscript.bash.snippet.userscript.UserScriptInstructions;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author leitz@mikeleitz.com
@@ -35,12 +37,12 @@ public class UserScript extends ApplicationFile {
         snippetContext.addValue("scriptFile", scriptName + extension);
         snippetContext.addValue("scriptName", scriptName);
 
-        List<String> optionsAndType = createOptionsAndType(bashScriptConfiguration);
+        List<String> allVariables = createAllVariablesList(bashScriptConfiguration);
 
-        UserScriptInstructions userScriptInstructions = new UserScriptInstructions(snippetContext, optionsAndType);
+        UserScriptInstructions userScriptInstructions = new UserScriptInstructions(snippetContext, allVariables);
         preambleList.add(userScriptInstructions);
 
-        UserScriptBody userScriptBody = new UserScriptBody(snippetContext, optionsAndType);
+        UserScriptBody userScriptBody = new UserScriptBody(snippetContext, allVariables);
         processingList.add(userScriptBody);
     }
 
@@ -82,13 +84,17 @@ public class UserScript extends ApplicationFile {
         return returnValue;
     }
 
-    protected List<String> createOptionsAndType(BashScriptConfiguration bashScriptConfiguration) {
+    protected List<String> createAllVariablesList(BashScriptConfiguration bashScriptConfiguration) {
         List<String> returnValue = new ArrayList<>();
 
         for (BashOption bashOption : bashScriptConfiguration.getBashOptions()) {
-            String variableName = bashOption.getVariableName();
-            String displayLine = String.format("%s", variableName);
-            returnValue.add(displayLine);
+            if (StringUtils.isNotBlank(bashOption.getLongName())) {
+                returnValue.add(bashOption.getIsSetVariableName());
+
+                if (BooleanUtils.isTrue(bashOption.optionHasValue())) {
+                    returnValue.add(String.format("%s", bashOption.getVariableName()));
+                }
+            }
         }
 
         return returnValue;

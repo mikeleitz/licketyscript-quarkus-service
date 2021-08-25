@@ -33,7 +33,7 @@ function .<option.longNameBashFriendly>Validate() {
   <vali.validationEnum.functionName> <option.longNameBashFriendly>Valid "$VALUE" "<vali.value>"
 
   if [ "$<option.longNameBashFriendly>Valid" -ne "0" ]; then
-    .log 2 "<option.longName> is invalid: value must be <vali.name>";
+    .log 2 "<option.longName> is invalid: <vali.validationEnum.validationFailedMessage>";
     return 22;
   fi
   }>

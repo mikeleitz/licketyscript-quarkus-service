@@ -1,6 +1,6 @@
 if [ -n "${LICKETY_SCRIPT_HOME+set}" ]; then
   . "$LICKETY_SCRIPT_HOME/scripts/<scriptName>/lickety-<scriptFile>" "$@"
-  .log 6 '$LICKETY_SCRIPT_HOME was set to ' $LICKETY_SCRIPT_HOME
+  .log 6 '$LICKETY_SCRIPT_HOME is set to ' $LICKETY_SCRIPT_HOME
 else
   echo 'LICKETY_SCRIPT_HOME variable not set. Set before running. The default location is $HOME/.lickety-script'
   exit 1
@@ -13,6 +13,6 @@ fi
 
 # Uncomment to print out the variables
 #
-# <allOptionsAndType:{ option |
-echo "$<option>"
+# <allVariables:{ variable |
+echo "<variable> : $<variable>"
 # }>

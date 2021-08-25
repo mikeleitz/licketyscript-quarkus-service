@@ -17,7 +17,7 @@ public class UserScriptBody extends Snippet {
 
         setSnippetTemplate(TEMPLATE_LOCATION);
 
-        context.addValue("allOptionsAndType", optionList);
+        context.addValue("allVariables", optionList);
     }
 
 }

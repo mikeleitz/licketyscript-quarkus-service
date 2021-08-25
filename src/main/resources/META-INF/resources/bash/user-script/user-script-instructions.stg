@@ -9,11 +9,24 @@
 # By the time the script execution makes it here, all inputs are considered
 # validated and you can process accordingly.
 #
-# These variables are available to you. The variables that end in _ARG are
-# the values supplied by the user. They all pass the appropriate
-# valadations specified in the tool.
+# These variables are available to you.
 #
-# <allOptionsAndType:{ option |<option>
+# The variables that end in _ARG are the values the user put in. They all
+# pass the appropriate valadations specified in the tool.
+#
+# The variables that end with _CHOOSEN have a value of 1 or 0. If the
+# value is 1, then the user selected the option when they ran the script.
+#
+# For example
+#
+# -h is for help
+# If the user specified -h, then HELP_OPTION_CHOSEN=1
+# If the user didn't specify -h, then HELP_OPTION_CHOSEN=0
+#
+# help doesn't have a variable that ends with _ARG, since there's
+# no input value for help, it's a switch. Selected or not.
+#
+# <allVariables:{ variable |<variable>
 # }>
 #
 # To run your script, execute

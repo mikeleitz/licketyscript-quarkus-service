@@ -1,3 +1,58 @@
+function .printHelp() {
+  echo "Copyright (c) 2021 "
+  echo "installer.sh  (August 25, 2021)"
+  echo ""
+  echo "Usage:"
+  echo "installer [-options]"
+  echo "Help:"
+  echo "      -h, --help                  give this help list"
+  echo "      -c, --cleanup               Move files instead of copy"
+  echo "      -v, --verbose               verbose operation"
+  echo "      -u, --install-user-script   Also install the user script"
+  exit 0
+}
+##################################################################################################
+# Declare all variables used in the input parsing section
+##################################################################################################
+
+HELP_OPTION_CHOSEN=
+CLEANUP_OPTION_CHOSEN=
+VERBOSE_OPTION_CHOSEN=
+INSTALL_USER_SCRIPT_OPTION_CHOSEN=
+
+
+# Arg parsing from: https://github.com/mattbryson/bash-arg-parse
+
+# positional args. Not supported in v1.
+args=()
+
+# Handle all possible script inputs.
+while [ "$1" != "" ]; do
+  case "$1" in
+  -h | --help)
+    .printHelp # Show help
+    ;;
+  -c | --cleanup)
+    CLEANUP_OPTION_CHOSEN=1
+    ;;
+  -v | --verbose)
+    __VERBOSE=7 # Verbose indicates logging at debug.
+    ;;
+  -u | --install-user-script)
+    INSTALL_USER_SCRIPT_OPTION_CHOSEN=1
+    ;;
+   --)
+    shift
+    break
+    ;;
+   *)
+    echo "Invalid input. Either unexpected option/switch specified or input is unsupported positional args."
+    exit 3
+    ;;
+  esac
+  shift
+done
+
 # Create directory if it doesn't exist
 mkdir -p $HOME/.lickety-script
 
@@ -31,21 +86,44 @@ then
     exit 1
 fi
 
-mv ./<scriptName>.md $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.md
-mv ./lickety-<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/lickety-<scriptName>.sh
-mv ./installer.sh $HOME/.lickety-script/scripts/<scriptName>/installer.sh
-mv ./manifest $HOME/.lickety-script/scripts/<scriptName>/manifest
-mv ./script-configuration.json $HOME/.lickety-script/scripts/<scriptName>/script-configuration.json
-mv ./license $HOME/.lickety-script/scripts/<scriptName>/license
+if [[ "$CLEANUP_OPTION_CHOSEN" == '1' ]]; then
+    mv ./<scriptName>.md $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.md
+    mv ./lickety-<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/lickety-<scriptName>.sh
+    mv ./installer.sh $HOME/.lickety-script/scripts/<scriptName>/installer.sh
+    mv ./manifest $HOME/.lickety-script/scripts/<scriptName>/manifest
+    mv ./script-configuration.json $HOME/.lickety-script/scripts/<scriptName>/script-configuration.json
+    mv ./license $HOME/.lickety-script/scripts/<scriptName>/license
+else
+    cp ./<scriptName>.md $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.md
+    cp ./lickety-<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/lickety-<scriptName>.sh
+    cp ./installer.sh $HOME/.lickety-script/scripts/<scriptName>/installer.sh
+    cp ./manifest $HOME/.lickety-script/scripts/<scriptName>/manifest
+    cp ./script-configuration.json $HOME/.lickety-script/scripts/<scriptName>/script-configuration.json
+    cp ./license $HOME/.lickety-script/scripts/<scriptName>/license
+fi
+
 
 # If the user script doesn't exist, copy it over. Otherwise don't copy and keep
 # the one that's currently there.
 
 if [ ! -f "$HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh" ]
 then
+  if [[ "$CLEANUP_OPTION_CHOSEN" == '1' ]]; then
     mv ./<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh
+  else
+    cp ./<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh
+  fi
 else
+  if [[ "$INSTALL_USER_SCRIPT_OPTION_CHOSEN" == '1' ]]; then
+    # backup old file
+    cp $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh-bak
+
+    cp ./<scriptName>.sh $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh
+  fi
+
+  if [[ "$CLEANUP_OPTION_CHOSEN" == '1' ]]; then
     rm ./<scriptName>.sh
+  fi
 fi
 
 ln -sf $HOME/.lickety-script/scripts/<scriptName>/<scriptName>.sh $HOME/.lickety-script/bin
